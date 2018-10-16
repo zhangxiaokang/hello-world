@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hf.shjw_globalconfig.dao.TimeConfigureDao" >
+<resultMap id="BaseResultMap" type="com.hf.shjw_globalconfig.model.TimeConfigure" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="time_quantum_name" property="timeName" jdbcType="VARCHAR" />
+        <result column="begin_time" property="beginTime" jdbcType="VARCHAR" />
+        <result column="end_time" property="endTime" jdbcType="VARCHAR" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        id, time_quantum_name, begin_time, end_time
+    </sql>
+     <insert id="insert" parameterType="com.hf.shjw_globalconfig.model.TimeConfigure" >
+    insert into time_configure 
+    		( time_quantum_name, begin_time, end_time)
+        values 
+        	(#{timeName,jdbcType=VARCHAR}, #{beginTime,jdbcType=VARCHAR},
+        	 #{endTime,jdbcType=VARCHAR})
+  </insert>
+  <update id="update" parameterType="com.hf.shjw_globalconfig.model.TimeConfigure" >
+        update time_configure
+        <set >
+            <if test="timeName != null" >
+                time_quantum_name = #{timeName,jdbcType=VARCHAR},
+            </if>
+            <if test="name!= null" >
+                begin_time = #{beginTime,jdbcType=VARCHAR},
+            </if>
+            
+            <if test="endTime != null" >
+                end_time = #{endTime,jdbcType=VARCHAR},
+            </if>
+      
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <delete id="delete" parameterType="java.lang.Integer" >
+        delete from time_configure
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <select id="select" resultMap="BaseResultMap" >
+        select
+        <include refid="Base_Column_List" />
+        from time_configure
+    </select>
+    <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select
+        <include refid="Base_Column_List" />
+        from time_configure
+         where id = #{id,jdbcType=INTEGER}
+    </select>
+</mapper>

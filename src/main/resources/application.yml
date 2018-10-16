@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: shjw-test
+  profiles:
+    active: singleton
+  thymeleaf:
+    prefix: classpath:/templates/
+  datasource:
+    url: jdbc:mysql://localhost:3306/db1
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+    # 使用druid数据源
+    type: com.alibaba.druid.pool.DruidDataSource
+#公共配置与profiles选择无关 mapperLocations指的路径是src/main/resources
+mybatis:
+  typeAliasesPackage: com.hf.shjw_globalconfig.model
+  mapperLocations: classpath:com/hf/shjw_globalconfig/dao/*.xml
+
+server:
+  port: 8099
+
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    #client间隔多长时间去拉去Server服务信息
+    registry-fetch-interval-seconds: 5
+    service-url:
+      defaultZone: http://localhost:8088/eureka/
+
+  

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>Insert title here</title>
+</head>
+<script>
+function postSimpleData() {
+	$.ajax({            
+		type: "POST",            
+		url: "configure/insert",            
+		contentType: "application/json", //必须有            
+		dataType: "json", //表示返回值类型，不必须            
+		data: JSON.stringify({ 'id': '2', 'configureKeyName': '早上', 'parentId': '1'}),   //相当于 //data: "{'str1':'foovalue', 'str2':'barvalue'}",            
+		success: function (jsonResult) {                
+			alert(jsonResult);            
+			}        
+		});    
+	}
+</script>
+<body>
+<button type="button" onclick="postSimpleData()">修改内容</button>
+</body>
+</html>

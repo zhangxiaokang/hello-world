@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hf.shjw_globalconfig.dao.BayonetConfigureDao" >
+<resultMap id="BaseResultMap" type="com.hf.shjw_globalconfig.model.BayonetConfigure" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="type" property="type" jdbcType="VARCHAR" />
+        <result column="description" property="description" jdbcType="VARCHAR" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="value" property="value" jdbcType="VARCHAR" />
+        <result column="sort" property="sort" jdbcType="VARCHAR" />
+        <result column="memo" property="memo" jdbcType="VARCHAR" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        id, type, description, name, value, sort, memo
+    </sql>
+     <insert id="insert" parameterType="com.hf.shjw_globalconfig.model.BayonetConfigure" >
+    insert into bayonet_configure 
+    		(id, type, name, memo, value, sort, description)
+        values 
+        	(#{id,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
+        	#{memo,jdbcType=VARCHAR}, #{value,jdbcType=VARCHAR}, #{sort,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR})
+  </insert>
+  <update id="update" parameterType="com.hf.shjw_globalconfig.model.BayonetConfigure" >
+        update bayonet_configure
+        <set >
+            <if test="type != null" >
+                type = #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="name!= null" >
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="memo != null" >
+                memo = #{memo,jdbcType=VARCHAR},
+            </if>
+            <if test="value != null" >
+                value = #{value,jdbcType=VARCHAR},
+            </if>
+            <if test="sort != null" >
+                sort = #{sort,jdbcType=VARCHAR},
+            </if>
+             <if test="description != null" >
+                description = #{description,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <delete id="delete" parameterType="java.lang.Integer" >
+        delete from bayonet_configure
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <select id="select" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select
+        <include refid="Base_Column_List" />
+        from bayonet_configure
+    </select>
+  
+</mapper>
